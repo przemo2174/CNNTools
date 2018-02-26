@@ -11,13 +11,12 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if os.path.isdir(args.input):
-        images_paths = []
-        for dirpath, dirnames, filenames in os.walk(args.input):
-            for filename in filenames:
-                images_paths.append(os.path.abspath(os.path.join(dirpath, filename)))    
+        # Get all absolute paths for files in given directory
+        images_paths = [os.path.abspath(os.path.join(dirpath, filename)) for dirpath, dirnames, filenames in os.walk(args.input) for filename in filenames]
 
         image_modifier = ImageModifier(images_paths)
-        image_modifier.modify_images()        
+        image_modifier.modify_images()
+        
     else:
         print(args.input, ' - folder not found', file=sys.stderr)
         sys.exit()
