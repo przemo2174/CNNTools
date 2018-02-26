@@ -17,8 +17,10 @@ class ImageModifier:
         images_data = [misc.imread(image_path) for image_path in self.images_paths]
         self.modified_images = self.seq.augment_images(images_data)
         i = 1
+        if not os.path.isdir('modified'):
+            os.makedirs('modified')
         for modify_image in self.modified_images:
-            misc.imsave(os.path.join('modified', 'image_' + str(i) + '.jpg'), self.f)
+            misc.imsave(os.path.join('modified', 'image_' + str(i) + '.jpg'), modify_image)
             i += 1
 
 
