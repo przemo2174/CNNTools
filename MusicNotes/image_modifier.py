@@ -5,11 +5,14 @@ import os
 
 class ImageModifier:
     def __init__(self, images_paths):
-        self.seq = iaa.Sequential([
-            iaa.Fliplr(0.5), # horizontally flip 50% of the images
-            iaa.GaussianBlur(sigma=(0, 3.0)) # blur images with a sigma of 0 to 3.0
+        sometimes = lambda aug: iaa.Sometimes(0.5, aug)
+        self.seq = iaa.Sequential([       
+            sometimes(iaa.Affine(
+                scale={"x": (0.8, 1.2), "y": (0.8, 1.2)},
+                rotate=(-45, 45)
+            ))
+            # iaa.GaussianBlur(sigma=(0, 3.0)) # blur images with a sigma of 0 to 3.0
             ])
-        self.f = misc.face()
         self.images_paths = images_paths
         self.modified_images = []        
 

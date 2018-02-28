@@ -7,6 +7,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--input', required=True, help='input folder with images to process')
     parser.add_argument('-o', '--output', required=True, help='output folder to save images')
+    # parser.add_argument('-n', '--number', required=True, help='number of images to generate for single image' )
 
     args = parser.parse_args()
 
