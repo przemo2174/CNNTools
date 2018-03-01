@@ -7,7 +7,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--input', required=True, help='input folder with images to process')
     parser.add_argument('-o', '--output', required=True, help='output folder to save images')
-    # parser.add_argument('-n', '--number', required=True, help='number of images to generate for single image' )
+    parser.add_argument('-n', '--number', required=True, help='number of images to generate for single image')
 
     args = parser.parse_args()
 
@@ -16,7 +16,7 @@ if __name__ == '__main__':
         images_paths = [os.path.abspath(os.path.join(dirpath, filename)) for dirpath, dirnames, filenames in os.walk(args.input) for filename in filenames]
 
         image_modifier = ImageModifier(images_paths)
-        image_modifier.modify_images()
+        image_modifier.modify_images(args.output, int(args.number))
         
     else:
         print(args.input, ' - folder not found', file=sys.stderr)
