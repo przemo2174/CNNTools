@@ -1,8 +1,6 @@
 import argparse
-import sys
 import os
 from numpy import random
-from shutil import copyfile
 from pathlib import Path
 import shutil
 
@@ -47,6 +45,7 @@ if __name__ == '__main__':
     if images_paths_length != xmls_paths_length:
         exit("Some images were untagged")
     
+    # dictionary in format (path_to_image, path_to_xml_corresponding_to_that_image)
     images_xmls_dict = (dict(zip(images_paths, xmls_paths)))
 
     # take random images paths to test taking into account proportion
@@ -57,8 +56,8 @@ if __name__ == '__main__':
     # copy randomly choosen images and xml to test dataset folder
     for image_path in test_images_paths:
         xml_path = images_xmls_dict[image_path]
-        copyfile(image_path, os.path.join(test_dataset_dir_path, Path(image_path).name))
-        copyfile(xml_path, os.path.join(test_dataset_dir_path, Path(xml_path).name))
+        shutil.copyfile(image_path, os.path.join(test_dataset_dir_path, Path(image_path).name))
+        shutil.copyfile(xml_path, os.path.join(test_dataset_dir_path, Path(xml_path).name))
 
     os.mkdir(train_dataset_dir_path)
 
@@ -68,25 +67,11 @@ if __name__ == '__main__':
     # copy randomly choosen images and xml to train dataset folder
     for image_path in train_images_paths:
         xml_path = images_xmls_dict[image_path]
-        copyfile(image_path, os.path.join(train_dataset_dir_path, Path(image_path).name))
-        copyfile(xml_path, os.path.join(train_dataset_dir_path, Path(xml_path).name))
+        shutil.copyfile(image_path, os.path.join(train_dataset_dir_path, Path(image_path).name))
+        shutil.copyfile(xml_path, os.path.join(train_dataset_dir_path, Path(xml_path).name))
 
     print('Done...')
     print('All images count:', images_paths_length)
     print('Test images count:', len(test_images_paths))
     print('Train images count:', len(train_images_paths))
-
-
-    
-
-
-
-
-
-
-    
-
-
-
-
 
