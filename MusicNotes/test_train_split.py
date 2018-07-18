@@ -42,7 +42,12 @@ if __name__ == '__main__':
     images_paths_length = len(images_paths)
     xmls_paths_length = len(xmls_paths)
 
+    print('Images count', images_paths_length)
+    print('Xmls count', xmls_paths_length)
+
     if images_paths_length != xmls_paths_length:
+        untagged_images = set([image_name.split('.')[0] for image_name in images_paths]) - set([xml_name.split('.')[0] for xml_name in xmls_paths])
+        print(untagged_images)
         exit("Some images were untagged")
     
     # dictionary in format (path_to_image, path_to_xml_corresponding_to_that_image)

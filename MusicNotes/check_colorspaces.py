@@ -26,6 +26,8 @@ if __name__ == '__main__':
             gray_names.append(file_path)
         elif len(image.shape) == 3:
             print('Color(RGB)')
+        elif len(image.shape) == 4:
+            print('Color(RGBA)')
 
     print(count)
     print(gray_names)

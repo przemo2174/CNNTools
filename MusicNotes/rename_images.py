@@ -33,7 +33,7 @@ if __name__ == '__main__':
     images_paths = sorted([x for x in files_paths if not x.endswith('.xml')])
     xmls_paths = sorted([x for x in files_paths if x.endswith('.xml')])
 
-    counter = 1
+    counter = 252
 
     for image_path in images_paths:
         image_name_without_extension, image_extension = os.path.splitext(os.path.basename(image_path))

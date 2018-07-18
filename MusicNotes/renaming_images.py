@@ -12,12 +12,13 @@ print(directory_path)
 
 filenames = os.listdir(directory_path)
 
-i = 1
+i = 209
 
 for filename in os.listdir(directory_path):
     extension = filename.split('.')[-1]
     old_filename_path = os.path.join(directory_path, filename)
-    new_filename_path = os.path.join(directory_path, directory_name + '_' + str(i) + '.' + extension)
+    print(directory_path)
+    new_filename_path = os.path.join(directory_path, 'image_' + str(i) + '.' + extension)
     print('Renaming', old_filename_path, 'to', new_filename_path)
     os.rename(old_filename_path, new_filename_path)
     i += 1
