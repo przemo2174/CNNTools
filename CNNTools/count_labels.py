@@ -45,8 +45,6 @@ if __name__ == '__main__':
     test_files_paths = []
     
     # Get all absolute paths for files in given directory
-    files_paths = [os.path.abspath(os.path.join(dirpath, filename)) for dirpath, dirnames, filenames in os.walk(input_folder) for filename in filenames]
-
     files_paths = [os.path.join(input_folder, file_name) for file_name in os.listdir(input_folder) if os.path.isfile(os.path.join(input_folder, file_name))]
 
     try:

@@ -11,7 +11,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--input', required=True, help='input folder with images to process')
     parser.add_argument('-n', '--name', required=False, default='image', help='base name for all images')
-    parser.add_argument('-o', '--output', required=True, help='output folder to save processed files')   
+    parser.add_argument('-o', '--output', required=True, help='output folder to save processed files')
+    parser.add_argument('--start', required=False, default=1)   
 
     args = parser.parse_args()
 
@@ -33,7 +34,7 @@ if __name__ == '__main__':
     images_paths = sorted([x for x in files_paths if not x.endswith('.xml')])
     xmls_paths = sorted([x for x in files_paths if x.endswith('.xml')])
 
-    counter = 252
+    counter = int(args.start)
 
     for image_path in images_paths:
         image_name_without_extension, image_extension = os.path.splitext(os.path.basename(image_path))
