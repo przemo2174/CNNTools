@@ -9,8 +9,10 @@ def count_labels_in_folder(files_paths):
     xmls_paths = sorted([x for x in files_paths if x.endswith('.xml')])
 
     labels_dict = {}
+    xmls_labels_count = {}
 
     for xml_path in xmls_paths:
+        label_count = 0
         tree = et.parse(xml_path)
         root = tree.getroot()
         for child in root:
@@ -18,12 +20,20 @@ def count_labels_in_folder(files_paths):
                 for nested_child in child:
                     if nested_child.tag == 'name':
                         label_name = nested_child.text
+                        label_count += 1
                         if label_name in labels_dict:
                             labels_dict[label_name] += 1
                         else:
                             labels_dict[label_name] = 1
-    
-    return labels_dict
+
+        xmls_labels_count[xml_path] = label_count
+
+    return labels_dict, xmls_labels_count
+
+def pretty_print(dictionary):
+    for key, value in dictionary.items():
+        print(key, "\t", value)
+
 
 
 if __name__ == '__main__':
@@ -58,13 +68,14 @@ if __name__ == '__main__':
         print("Test folder not found")
 
 
-    all_labels_dict = count_labels_in_folder(files_paths)
+    all_labels_dict, xmls_labels = count_labels_in_folder(files_paths)
     print('All files labels:')
-    print(all_labels_dict)
+    pretty_print(all_labels_dict)
+    pretty_print(xmls_labels)
 
     if train_files_paths and test_files_paths:
-        train_labels_dict = count_labels_in_folder(train_files_paths)
-        test_labels_dict = count_labels_in_folder(test_files_paths)
+        train_labels_dict, _ = count_labels_in_folder(train_files_paths)
+        test_labels_dict, _ = count_labels_in_folder(test_files_paths)
 
         print('Train files labels:')
         print(train_labels_dict)
