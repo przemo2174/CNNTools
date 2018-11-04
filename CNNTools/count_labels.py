@@ -50,11 +50,17 @@ class LabelsCounter:
         labels = list(labels_dict.keys())
         values = list(labels_dict.values())
 
+
+
         y_pos = np.arange(len(labels))
 
         plt.bar(y_pos, values, align='center')
-        plt.xticks(y_pos, labels)
-        plt.title(title)
+        plt.xticks(y_pos, labels, fontweight="bold", fontsize="12")
+        plt.title(title, fontsize="16")
+        # plt.text(y_pos[0], 515, "512", color="blue", fontweight="bold", fontsize="16")
+        # plt.text(y_pos[1], 515, "512", color="blue", fontweight="bold", fontsize="16")
+        for i, v in enumerate(y_pos):
+            plt.text(v - 0.12, values[i] + 2, str(values[i]), color="blue", fontweight="bold", fontsize="16")
  
         plt.show()
 
