@@ -10,6 +10,7 @@ if __name__ == '__main__':
     parser.add_argument('-i', '--input', required=True, help='input folder with images to process')
     parser.add_argument('--test', required=False, default=0.3, type=float, help='proportion in 0.XX format how many percentage of images should be moved to test folder (default is 0.3)')
     parser.add_argument('--train', required=False, default=0.7, type=float, help='proportion in 0.XX format how many percentage of images should be moved to train folder (default is 0.7')
+    parser.add_argument('--randomize', required=False, default=False, type=bool)
 
     args = parser.parse_args()
     
@@ -53,8 +54,12 @@ if __name__ == '__main__':
     # dictionary in format (path_to_image, path_to_xml_corresponding_to_that_image)
     images_xmls_dict = (dict(zip(images_paths, xmls_paths)))
 
-    # take random images paths to test taking into account proportion
-    test_images_paths = random.choice(images_paths, int(args.test * images_paths_length), replace=False)
+    test_images_paths = []
+    if not args.randomize:
+        test_images_paths = images_paths[0:int(args.test * images_paths_length)]
+    else:
+        # take random images paths to test taking into account proportion
+        test_images_paths = random.choice(images_paths, int(args.test * images_paths_length), replace=False)
 
     os.mkdir(test_dataset_dir_path)
 
